@@ -75,7 +75,7 @@ export class RecipeEditComponent implements OnInit {
       this.recipesService.addRecipe(newRecipe);
     }
     this.editMode = false;
-    this.router.navigate(['/recipes']);
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 
   onAddIngredient() {
@@ -90,10 +90,14 @@ export class RecipeEditComponent implements OnInit {
     );
   }
 
+  onDeleteIngredient(index: number) {
+    (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
+  }
+
   onCancel() {
     this.editMode = false;
-    this.recipeForm.reset();
-    this.router.navigate(['/recipes']);
+    // this.recipeForm.reset();
+    this.router.navigate(['../'],{relativeTo: this.route});
   }
 
 }
